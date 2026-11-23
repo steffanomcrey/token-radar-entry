@@ -3,12 +3,81 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Token Radar: pre-token protocols ranked by implied value</title>
+<title>Token Radar — pre-token protocols ranked by implied value</title>
 <link rel="stylesheet" href="app.css">
 </head>
 <body>
-<a class="skip" href="#board">Skip to the board</a>
-<main id="board" tabindex="-1" aria-busy="true"></main>
+
+<header class="masthead">
+  <div class="brand">
+    <span class="pulse" aria-hidden="true"></span>
+    <div>
+      <h1>Token Radar</h1>
+      <p class="deck">Protocols whose token does not trade yet, ranked by what the market's own multiples imply they are worth.</p>
+    </div>
+  </div>
+  <dl class="provenance" id="provenance"></dl>
+</header>
+
+<section class="verdict" id="verdict" aria-label="What the board says"></section>
+
+<nav class="controls" aria-label="Filters">
+  <div class="control-row">
+    <label class="search">
+      <span class="visually-hidden">Filter protocols</span>
+      <input id="q" type="search" autocomplete="off" spellcheck="false" placeholder="Filter: name, slug, category, chain…">
+    </label>
+    <div class="selects">
+      <label class="select"><span class="visually-hidden">Category</span><select id="cat"></select></label>
+      <label class="select"><span class="visually-hidden">Chain</span><select id="chain"></select></label>
+      <label class="select"><span class="visually-hidden">Order</span><select id="sort">
+        <option value="value">Order: implied value</option>
+        <option value="tvl">Order: TVL</option>
+        <option value="growth">Order: 7d growth</option>
+        <option value="age">Order: age</option>
+        <option value="rank">Order: board rank</option>
+      </select></label>
+    </div>
+  </div>
+  <div class="control-row">
+    <div class="chips" id="chips"></div>
+    <p class="count" id="count"></p>
+  </div>
+</nav>
+
+<main class="split">
+  <section class="boardwrap" id="boardwrap">
+    <table class="board" id="board">
+      <thead>
+        <tr>
+          <th class="c-rank">#</th>
+          <th class="c-name">Protocol</th>
+          <th class="c-cat">Category</th>
+          <th class="c-chain">Chain</th>
+          <th class="c-num">TVL</th>
+          <th class="c-num">7d</th>
+          <th class="c-num">Peer ×</th>
+          <th class="c-implied">Implied value</th>
+        </tr>
+      </thead>
+      <tbody id="rows"></tbody>
+    </table>
+    <p class="empty" id="empty" hidden>No protocol matches those filters.</p>
+  </section>
+
+  <aside class="detail" id="detail" aria-live="polite"></aside>
+</main>
+
+<section class="views" id="views">
+  <div class="view" id="view-live" hidden></div>
+  <div class="view" id="view-model" hidden></div>
+</section>
+
+<footer class="foot">
+  <p id="footnote"></p>
+  <p class="offline">This page is a single offline bundle: no network requests, no CDN, no webfonts. Data is the frozen snapshot named above.</p>
+</footer>
+
 <script src="../data.js"></script>
 <script src="app.js"></script>
 </body>
